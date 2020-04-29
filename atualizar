@@ -1,0 +1,10 @@
+
+. variaveis.aux
+
+echo $diretorio_facil
+
+facil () {
+
+
+
+}
