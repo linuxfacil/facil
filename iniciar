@@ -1,0 +1,20 @@
+#!/bin/bash -xv -e
+
+#Define os caminhos correntes da instalação local
+caminho_iniciar=$PWD/$0
+diretorio_facil="${caminho_iniciar/\/iniciar/''}"
+
+#Dá permissão de execução para o arquivo principal 'facil'
+
+echo caminho arquivo facil $diretorio_facil/facil
+sudo chmod u+x $diretorio_facil/facil2
+
+echo caminho iniciar $caminho_iniciar
+echo diretorio facil $diretorio_facil
+
+
+
+export PATH=$PATH:$diretorio_facil
+
+echo $PATH
+echo $PATH | grep $diretorio_facil
