@@ -5,16 +5,21 @@ caminho_iniciar=$PWD/$0
 diretorio_facil="${caminho_iniciar/\/iniciar/''}"
 
 #Dá permissão de execução para o arquivo principal 'facil'
+chmod +x $diretorio_facil/facil
 
-echo caminho arquivo facil $diretorio_facil/facil
-sudo chmod u+x $diretorio_facil/facil2
+#Verifica se existe variável $PATH definida no arquivo
+existe_path=$(grep -c "PATH=" $HOME/.bashrc)
 
-echo caminho iniciar $caminho_iniciar
-echo diretorio facil $diretorio_facil
+#Faz backup do arquivo antes de modificar
+data_hora=$(date +%Y-%m-%d-%H-%M-%S)
+cp $HOME/.bashrc $HOME/.bashrc.$data_hora.bak
 
+#Se existir a variável $PATH, ajusta, senão, cria
+if [[ $existe_path -ge 1 ]]; then
+	sed -i 's;^PATH=.*;PATH='$diretorio_facil:"$PATH"';' $HOME/.bashrc
+else
+	echo PATH=$diretorio_facil:"$PATH" >> $HOME/.bashrc
+fi
 
-
-export PATH=$PATH:$diretorio_facil
-
-echo $PATH
-echo $PATH | grep $diretorio_facil
+#Recarrega o shell para considerar o novo $PATH
+exec bash
