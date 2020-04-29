@@ -1,7 +1,9 @@
 #!/bin/bash  -e
 
-echo Olá mundo!
-
-echo Digite facil ajuda 
-
-bash $1 $2
+if [ $1 == ''] 
+then
+	echo Olá mundo!
+	echo Digite: facil ajuda 
+else
+	bash $1 $2
+fi
