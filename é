@@ -2,8 +2,10 @@ super_usuario () {
 if [ "$(id -u)" -ne 0 ] 
 then 
 	super_usuario=não
+	echo $super_usuario
 else
 	super_usuario=sim
+	echo $super_usuario
 fi
 }
 
@@ -12,5 +14,5 @@ super_usuario
 }
 
 
-super_usuario
-echo $super_usuario
+$1
+
