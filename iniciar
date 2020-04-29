@@ -25,9 +25,11 @@ fi
 existe_df_local_ini=$(grep -c "diretorio_facil=" $diretorio_facil/local.ini)
 
 #Se existir a variável diretorio_facil, ajusta, senão, cria
+touch $diretorio_facil/local.ini
 if [[ $existe_df_local_ini -ge 1 ]]; then
 	sed -i 's;^diretorio_facil=.*;diretorio_facil='$diretorio_facil';' $diretorio_facil/local.ini
 else
+	echo [diretorios] >> $diretorio_facil/local.ini
 	echo diretorio_facil=$diretorio_facil >> $diretorio_facil/local.ini
 fi
 

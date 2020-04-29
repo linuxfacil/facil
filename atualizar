@@ -1,5 +1,7 @@
 
-. variaveis.aux
+. local.ini
+. variaveis.conf
+
 
 echo $diretorio_facil
 
