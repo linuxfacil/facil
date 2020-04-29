@@ -7,18 +7,28 @@ diretorio_facil="${caminho_iniciar/\/iniciar/''}"
 #Dá permissão de execução para o arquivo principal 'facil'
 chmod +x $diretorio_facil/facil
 
-#Verifica se existe variável $PATH definida no arquivo
-existe_path=$(grep -c "PATH=" $HOME/.bashrc)
-
 #Faz backup do arquivo antes de modificar
 data_hora=$(date +%Y-%m-%d-%H-%M-%S)
 cp $HOME/.bashrc $HOME/.bashrc.$data_hora.bak
+
+#Verifica se existe variável $PATH definida no arquivo
+existe_path=$(grep -c "PATH=" $HOME/.bashrc)
 
 #Se existir a variável $PATH, ajusta, senão, cria
 if [[ $existe_path -ge 1 ]]; then
 	sed -i 's;^PATH=.*;PATH='$diretorio_facil:"$PATH"';' $HOME/.bashrc
 else
 	echo PATH=$diretorio_facil:"$PATH" >> $HOME/.bashrc
+fi
+
+#Salva caminho no arquivo local.iniciar
+existe_df_local_ini=$(grep -c "diretorio_facil=" $diretorio_facil/local.ini)
+
+#Se existir a variável diretorio_facil, ajusta, senão, cria
+if [[ $existe_df_local_ini -ge 1 ]]; then
+	sed -i 's;^diretorio_facil=.*;diretorio_facil='$diretorio_facil';' $diretorio_facil/local.ini
+else
+	echo diretorio_facil=$diretorio_facil >> $diretorio_facil/local.ini
 fi
 
 #Recarrega o shell para considerar o novo $PATH
