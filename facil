@@ -1,6 +1,6 @@
 #!/bin/bash  -e
 
-if [ "$1" == ""] 
+if [ "$1" eq ""] 
 then
 	echo Olá mundo!
 	echo Digite: facil ajuda 
