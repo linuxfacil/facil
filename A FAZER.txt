@@ -1,0 +1,2 @@
+funcoes
+data-hora data_hora=$(date +%Y-%m-%d-%H-%M-%S)
