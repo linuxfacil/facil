@@ -1,0 +1,16 @@
+super_usuario () {
+if [ "$(id -u)" -ne 0 ] 
+then 
+	super_usuario=não
+else
+	super_usuario=sim
+fi
+}
+
+sudo () {
+super_usuario
+}
+
+
+super_usuario
+echo $super_usuario

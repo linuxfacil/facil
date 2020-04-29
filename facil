@@ -1,2 +1,4 @@
-#!/bin/bash
-echo hello world
+#!/bin/bash  -e
+set +xv
+
+bash $1 $2
