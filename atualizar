@@ -3,7 +3,7 @@
 . variaveis.conf
 
 echo atuaaa
-facil2 () {
+facil () {
 	echo atubbb
 	cd $diretorio_facil
 	git pull
