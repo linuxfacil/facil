@@ -1,5 +1,6 @@
 #!/bin/bash  -e
 
-echo Olá mundo
+echo Olá mundo!
 
+echo Em breve 
 bash $1 $2

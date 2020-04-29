@@ -3,10 +3,7 @@
 . variaveis.conf
 
 
-echo $diretorio_facil
-
 facil () {
-
-
-
+	cd $diretorio_facil
+	git pull
 }
