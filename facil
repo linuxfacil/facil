@@ -2,5 +2,6 @@
 
 echo Olá mundo!
 
-echo Em breve 
+echo Digite facil ajuda 
+
 bash $1 $2
