@@ -8,3 +8,5 @@ facil2 () {
 	cd $diretorio_facil
 	git pull
 }
+
+$1
