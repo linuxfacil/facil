@@ -29,7 +29,7 @@ touch $diretorio_facil/local.ini
 if [[ $existe_df_local_ini -ge 1 ]]; then
 	sed -i 's;^diretorio_facil=.*;diretorio_facil='$diretorio_facil';' $diretorio_facil/local.ini
 else
-	echo [diretorios] >> $diretorio_facil/local.ini
+	echo #[diretorios] >> $diretorio_facil/local.ini
 	echo diretorio_facil=$diretorio_facil >> $diretorio_facil/local.ini
 fi
 
