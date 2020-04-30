@@ -1,13 +1,10 @@
-echo 3 $diretorio_facil
-
 . local-facil.ini
-
-echo 4 $diretorio_facil
 
 facil () {
 
-echo 5 $diretorio_facil
 	cd $diretorio_facil
 	git pull
+
+}
 
 $1
