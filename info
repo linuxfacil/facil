@@ -1,13 +1,13 @@
 
 hds () {
-	echo -----------
-	echo Uso dos HDs
-	echo -----------
+	echo ----------------------------------
+	echo  Uso das partições e HDs montados
+	echo ----------------------------------
 	df -h
 
-	echo ----------------
-	echo Detalhes dos HDs
-	echo ----------------
+	echo ------------------
+	echo  Detalhes dos HDs
+	echo ------------------
 	
 	blkid
 	
