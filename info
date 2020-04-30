@@ -1,8 +1,16 @@
 
 hds () {
+	echo
+	echo Uso dos HDs
+	echo
+	df -h
 
-	blkid
+	echo
+	echo Detalhes dos HDs
+	echo
 	
+	blkid
+
 }
 
 $1
