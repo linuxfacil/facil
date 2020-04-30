@@ -3,8 +3,6 @@
 # git clone https://github.com/linuxfacil/facil
 # Autor: Antonio Morais
 
-#Carrega configurações
-. variaveis.conf
 
 #Define os caminhos correntes da instalação local
 caminho_iniciar=$PWD/$0
@@ -12,6 +10,8 @@ diretorio_facil="${caminho_iniciar/\/iniciar/''}"
 diretorio_local_bin=/usr/local/bin
 caminho_local_ini=$diretorio_facil/$nome_arq_local_ini
 
+#Carrega configurações
+. $diretorio_facil/variaveis.conf
 
 #Dá permissão de execução para o arquivo principal 'facil'
 chmod +x $diretorio_facil/facil
