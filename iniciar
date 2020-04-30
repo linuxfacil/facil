@@ -37,4 +37,3 @@ fi
 #Recarrega o shell para considerar o novo $PATH
 exec bash
 
-facilfac
