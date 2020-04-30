@@ -1,6 +1,6 @@
 
-. local.ini
-. variaveis.conf
+. local-facil.ini
+
 
 facil () {
 	cd $diretorio_facil
