@@ -19,8 +19,8 @@ caminho_local_ini=$diretorio_facil/$nome_arq_local_ini
 chmod +x $diretorio_facil/facil
 
 #Cria links simbólicos para disponibilizar o facil para o sudo e demais usuários
-sudo ln -s $diretorio_facil/facil $diretorio_local_bin
-sudo ln -s $caminho_local_ini $diretorio_local_bin/$nome_arq_local_ini
+sudo ln -sfn $diretorio_facil/facil $diretorio_local_bin
+sudo ln -sfn $caminho_local_ini $diretorio_local_bin/$nome_arq_local_ini
 
 #Salva caminho no arquivo local.ini
 touch $caminho_local_ini
