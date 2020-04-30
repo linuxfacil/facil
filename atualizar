@@ -9,10 +9,5 @@ facil () {
 echo 5 $diretorio_facil
 	cd $diretorio_facil
 	git pull
-	
-echo 6 $diretorio_facil
-	bash $diretorio_facil/iniciar
-echo 7 $diretorio_facil
-}
 
 $1
