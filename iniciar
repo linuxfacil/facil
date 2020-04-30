@@ -8,10 +8,12 @@
 caminho_iniciar=$PWD/$0
 diretorio_facil="${caminho_iniciar/\/iniciar/''}"
 diretorio_local_bin=/usr/local/bin
-caminho_local_ini=$diretorio_facil/$nome_arq_local_ini
 
 #Carrega configurações
 . $diretorio_facil/variaveis.conf
+
+#Define caminho do arquivo local ini
+caminho_local_ini=$diretorio_facil/$nome_arq_local_ini
 
 #Dá permissão de execução para o arquivo principal 'facil'
 chmod +x $diretorio_facil/facil
