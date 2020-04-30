@@ -1,5 +1,8 @@
 #!/bin/bash -xv -e
 
+# git clone https://github.com/linuxfacil/facil
+# Autor: Antonio Morais
+
 #Define os caminhos correntes da instalação local
 caminho_iniciar=$PWD/$0
 diretorio_facil="${caminho_iniciar/\/iniciar/''}"
@@ -8,18 +11,18 @@ diretorio_facil="${caminho_iniciar/\/iniciar/''}"
 chmod +x $diretorio_facil/facil
 
 #Faz backup do arquivo antes de modificar
-data_hora=$(date +%Y-%m-%d-%H-%M-%S)
-cp $HOME/.bashrc $HOME/.bashrc.$data_hora.bak
+#data_hora=$(date +%Y-%m-%d-%H-%M-%S)
+#cp $HOME/.bashrc $HOME/.bashrc.$data_hora.bak
 
 #Verifica se existe variável $PATH definida no arquivo
-existe_path=$(grep -c "PATH=" $HOME/.bashrc)
+#existe_path=$(grep -c "PATH=" $HOME/.bashrc)
 
 #Se existir a variável $PATH, ajusta, senão, cria
-if [[ $existe_path -ge 1 ]]; then
-	sed -i 's;^PATH=.*;PATH='$diretorio_facil:"$PATH"';' $HOME/.bashrc
-else
-	echo PATH=$diretorio_facil:"$PATH" >> $HOME/.bashrc
-fi
+#if [[ $existe_path -ge 1 ]]; then
+#	sed -i 's;^PATH=.*;PATH='$diretorio_facil:"$PATH"';' $HOME/.bashrc
+#else
+#	echo PATH=$diretorio_facil:"$PATH" >> $HOME/.bashrc
+#fi
 
 #Cria link simbolico para disponibilizar o facil para o sudo
 sudo ln -s $diretorio_facil/facil /usr/local/bin
