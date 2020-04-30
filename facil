@@ -3,14 +3,12 @@
 #Carrega as variáveis do arquivo ini local
 . local-facil.ini
 
-#Se tentar iniciar, erro
+#Se tentar iniciar com 'facil', erro
 if [[ $1 == "iniciar" ]]
 then 
 	echo "Para iniciar digite 'bash iniciar' dentro do diretorio $diretorio_facil" 
 	exit 1
 fi
-
-
 
 #Se não definir variáveis, envia mensagens
 if [ -z "$1" ]
@@ -21,3 +19,8 @@ else
 	bash $diretorio_facil/$1 $2
 fi
 
+#Manter o shell BASH, independentemente da chamada do Shell (sh ou dash) 
+if [ -z "$BASH_VERSION" ]
+then
+    exec bash "$0" "$@"
+fi
