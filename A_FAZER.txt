@@ -1,2 +1,16 @@
 funcoes
 data-hora data_hora=$(date +%Y-%m-%d-%H-%M-%S)
+
+#Faz backup do arquivo antes de modificar
+#data_hora=$(date +%Y-%m-%d-%H-%M-%S)
+#cp $HOME/.bashrc $HOME/.bashrc.$data_hora.bak
+
+#Verifica se existe variável $PATH definida no arquivo
+#existe_path=$(grep -c "PATH=" $HOME/.bashrc)
+
+#Se existir a variável $PATH, ajusta, senão, cria
+#if [[ $existe_path -ge 1 ]]; then
+#	sed -i 's;^PATH=.*;PATH='$diretorio_facil:"$PATH"';' $HOME/.bashrc
+#else
+#	echo PATH=$diretorio_facil:"$PATH" >> $HOME/.bashrc
+#fi

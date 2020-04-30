@@ -1,9 +1,12 @@
 #!/bin/bash  -e
 
+#Carrega as variáveis do arquivo ini local
+. local-facil.ini
+
 if [ -z "$1" ]
 then
 	echo Olá mundo!
 	echo Digite: facil ajuda 
 else
-	bash $1 $2
+	bash $diretorio_facil/$1 $2
 fi
