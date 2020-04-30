@@ -12,6 +12,7 @@ echo 5 $diretorio_facil
 	
 echo 6 $diretorio_facil
 	bash $diretorio_facil/iniciar
+echo 7 $diretorio_facil
 }
 
 $1
