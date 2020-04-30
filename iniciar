@@ -21,6 +21,9 @@ else
 	echo PATH=$diretorio_facil:"$PATH" >> $HOME/.bashrc
 fi
 
+#Cria link simbolico para disponibilizar o facil para o sudo
+sudo ln -s $diretorio_facil/facil /usr/local/bin
+
 #Salva caminho no arquivo local.iniciar
 existe_df_local_ini=$(grep -c "diretorio_facil=" $diretorio_facil/local.ini)
 
