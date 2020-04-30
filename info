@@ -1,13 +1,13 @@
 
 hds () {
-	echo
+	echo -----------
 	echo Uso dos HDs
-	echo
+	echo -----------
 	df -h
 
-	echo
+	echo ----------------
 	echo Detalhes dos HDs
-	echo
+	echo ----------------
 	
 	blkid
 
