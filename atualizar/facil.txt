@@ -1,4 +1,2 @@
-facil () {
-	cd $diretorio_facil
-	git pull
-}
+cd $diretorio_facil
+git pull
