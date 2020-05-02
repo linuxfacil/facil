@@ -14,7 +14,4 @@ ubuntu () {
 
 }
 
-ola () { $diretorio_facil/testar/ola.txt }
-
-
 $1
