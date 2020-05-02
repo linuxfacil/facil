@@ -19,6 +19,7 @@ else
 	
 	#bash $diretorio_facil/$1.txt $2
 	
+	export diretorio_facil
 	bash $diretorio_facil/$1/$2.txt
 
 	
