@@ -1,5 +1,7 @@
 . local-facil.ini
 
+echo $diretorio_facil/testar/ola.txt
+cat $diretorio_facil/testar/ola.txt
 
 ola () { $diretorio_facil/testar/ola.txt }
 
