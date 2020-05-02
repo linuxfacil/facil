@@ -1,1 +1,2 @@
+echo $diretorio_facil
 echo Olá mundo!
