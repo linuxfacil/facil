@@ -10,6 +10,12 @@ hds () {
 	echo ------------------
 	
 	blkid
+
+	echo --------------------------
+	echo  Estrutura lógica dos HDs
+	echo --------------------------
+	
+	lsblk
 	
 	echo 
 

@@ -7,4 +7,11 @@ facil () {
 
 }
 
+ubuntu () {
+
+	sudo apt update -y
+	sudo apt upgrade -y
+
+}
+
 $1
