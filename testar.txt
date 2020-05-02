@@ -3,4 +3,4 @@
 echo $diretorio_facil/testar/ola.txt
 cat $diretorio_facil/testar/ola.txt
 
-ola () { bash $diretorio_facil/testar/ola.txt }
+ola () { bash $diretorio_facil/testar/ola.txt };
