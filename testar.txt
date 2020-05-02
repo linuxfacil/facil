@@ -1,0 +1,7 @@
+. local-facil.ini
+
+
+ola () { $diretorio_facil/testar/ola.txt }
+
+
+$1

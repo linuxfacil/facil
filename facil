@@ -16,7 +16,10 @@ then
 	echo Olá mundo!
 	echo Digite: facil ajuda 
 else
-	bash $diretorio_facil/$1 $2
+	
+	bash $diretorio_facil/$1.txt $2
+
+	
 fi
 
 #Manter o shell BASH, independentemente da chamada do Shell (sh ou dash) 
