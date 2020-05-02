@@ -3,6 +3,10 @@
 echo $0
 echo $1
 echo $2
+echo nnnnnn
+
+{$0/$diretorio_facil/$secondString}
+diretorio_comando=$0
 
 ola () { bash $diretorio_facil/testar/ola.txt; };
 
