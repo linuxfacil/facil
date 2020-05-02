@@ -4,3 +4,5 @@ echo $1
 echo $2
 
 ola () { bash $diretorio_facil/testar/ola.txt; };
+
+$1
