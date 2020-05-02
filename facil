@@ -13,15 +13,17 @@ fi
 #Se não definir variáveis, envia mensagens
 if [ -z "$1" ]
 then
+	#Envia mensagens
 	echo Olá mundo!
 	echo Digite: facil ajuda 
 else
 	
-	#bash $diretorio_facil/$1.txt $2
-	
+	#Envia variáveis para o script a ser chamado
 	export diretorio_facil
+	
+	#Executa comando
+	echo $0
 	bash $diretorio_facil/$1/$2.txt
-
 	
 fi
 
