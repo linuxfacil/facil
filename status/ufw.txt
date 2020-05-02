@@ -1,0 +1,2 @@
+ufw_status=$( ufw status | awk '{ print $2 }' | sed 's/[.]//' )
+echo ufw_status

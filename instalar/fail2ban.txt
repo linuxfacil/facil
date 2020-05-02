@@ -1,0 +1,3 @@
+
+apt install -y fail2ban #https://www.fail2ban.org/wiki/index.php/Main_Page
+service fail2ban start

@@ -1,0 +1,26 @@
+
+#add-apt-repository ppa:ondrej/apache2
+apt install -y apache2
+
+#Permalink
+a2enmod rewrite
+
+#Cache control
+a2enmod expires
+a2enmod headers
+
+#Configurar firewall do apache
+ufw allow in "Apache Full"
+ufw allow 22/tcp
+
+if [[ $(facil status ufw) == "active" ]] 
+then
+	#ufw disable
+	#ufw --force enable
+	echo Firewall ativado
+else
+	echo Firewall inativo
+fi
+
+apache2ctl configtest
+service apache2 restart
