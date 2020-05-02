@@ -1,2 +1,3 @@
-echo $diretorio_facil
+echo Diretório fácil: $diretorio_facil
+echo 
 echo Olá mundo!
