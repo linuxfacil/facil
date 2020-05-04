@@ -1,0 +1,6 @@
+
+#Pausar
+function pausa(){
+   read -p "Pressione [Enter] para continuar..."
+}
+ 
