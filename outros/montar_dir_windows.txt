@@ -1,0 +1,22 @@
+#Referência https://websiteforstudents.com/mount-windows-shares-everyone-ubuntu-17-04-17-10/
+
+#linux
+ponto_montagem=/mnt/win
+
+#windows
+ip_windows=nulo
+pasta_compartilhada=nulo
+nome_usuario=nulo
+senha_usuario=nulo
+
+#Instalar CIFS e SMBFS
+apt-get -y install cifs-utils
+
+#Criar ponto de montagem no linux
+mkdir $ponto_montagem
+
+sudo chown -R nobody:nogroup $ponto_montagem
+sudo chmod -R 0777 $ponto_montagem
+
+echo "Facil:Pasta compartilhada do windows" >> /etc/fstab
+echo //$ip_windows/$pasta_compartilhada $ponto_montagem cifs username=$nome_usuario,password=$senha_usuario,uid=nobody,iocharset=utf8,noperm 0 0 >> /etc/fstab
