@@ -1,7 +1,11 @@
 
 #Referência: https://www.cyberciti.biz/faq/bash-shell-change-the-color-of-my-shell-prompt-under-linux-or-unix/
 
-echo $1
+echo $PS1
+prompt_atual=$PS1
+
+
+echo $v3
 
 branco=\e[[\u@\h \W]$ \e[m
 preto=0;30
@@ -12,6 +16,5 @@ azul=0;34
 roxo=0;35
 cian=0;36
 
-cor=$1
- 
-export PS1="\e[$1m[\u@\h \W]\$ \e[m "
+
+export PS1="\e[$v3m[\u@\h \W]\$ \e[m "
