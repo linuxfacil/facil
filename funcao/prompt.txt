@@ -3,14 +3,16 @@
 
 #Padrão ubuntu: \[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\u@\h:\w\$
 
-padrao=\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\u@\h:\w\$
+padrao="\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\u@\h:\w\$"
 preto="0;30"
 vermelho="0;31"
 verde="0;32"
-marrom="0;33"
+amarelo="0;33"
 azul="0;34"
 roxo="0;35"
 cian="0;36"
+branco="0;37"
+
 
 
 
@@ -22,10 +24,10 @@ echo "  4)vermelho"
 
 read n
 case $n in
-  1) echo export PS1="\e[$verde[\u@\h \W]\$ \e[m ";;
-  2) echo export PS1="\e[$azul[\u@\h \W]\$ \e[m ";;
-  3) echo export PS1="\e[$cian[\u@\h \W]\$ \e[m ";;
-  4) echo export PS1="\e[$vermelho[\u@\h \W]\$ \e[m ";;
+  1) export PS1="\e[$verde[\u@\h \W]\$ \e[m ";;
+  2) export PS1="\e[$azul[\u@\h \W]\$ \e[m ";;
+  3) export PS1="\e[$cian[\u@\h \W]\$ \e[m ";;
+  4) export PS1="\e[$vermelho[\u@\h \W]\$ \e[m ";;
   *) echo "Opção inválida";;
 esac
 
