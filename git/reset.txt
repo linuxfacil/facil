@@ -1,0 +1,4 @@
+#Descarta alterações locais
+git reset --hard HEAD
+git clean -df
+git reset --hard origin/master 
