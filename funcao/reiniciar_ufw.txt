@@ -1,0 +1,10 @@
+
+#Reinicia UFW se estiver ativo
+if [[ $(facil status ufw) == "active" ]] 
+then
+	ufw disable
+	ufw --force enable
+	echo Firewall ativado
+else
+	echo Firewall inativo
+fi
