@@ -4,22 +4,23 @@ facil funcao titulo1 "Instalando o PHP"
 
 facil cabecalho
 
-versaophp=7.4
+versaophp=7.2
 caminhophpini=/etc/php/$versaophp/apache2/php.ini
 
 facil instalar repo-ubuntu-universe
 
 #Adicionando ppa
-add-apt-repository ppa:ondrej/php  
-add-apt-repository ppa:ondrej/apache2
+#add-apt-repository ppa:ondrej/php  
+#add-apt-repository ppa:ondrej/apache2
 
 apt update
 
 #Pacotes principais do PHP
-apt install -y php libapache2-mod-php php-mysql php-cli
+apt install -y php libapache2-mod-php  php-cli
 
 #Instalando extensões adicionais comuns do PHP
-apt install -y php$versaophp-curl php$versaophp-gd php$versaophp-mbstring php$versaophp-xml php$versaophp-xmlrpc php$versaophp-soap php$versaophp-intl php$versaophp-zip php-imagick php$versaophp-bcmath
+#apt remove flush -y php$versaophp-curl php$versaophp-gd php$versaophp-mbstring php$versaophp-xml php$versaophp-xmlrpc php$versaophp-soap php$versaophp-intl php$versaophp-zip php-imagick php$versaophp-bcmath
+apt install -y php$versaophp-mysql php$versaophp-curl php$versaophp-gd php$versaophp-mbstring php$versaophp-xml php$versaophp-xmlrpc php$versaophp-soap php$versaophp-intl php$versaophp-zip php-imagick php$versaophp-bcmath
 
 #Outras extensões do PHP
 apt install -y libphp-phpmailer #para envio de email
