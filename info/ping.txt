@@ -1,0 +1,14 @@
+
+#Instala o fping se nao existir
+which fping || apt-get install fping
+
+IP=$1
+
+fping -c1 -t300 $IP 2>/dev/null 1>/dev/null
+if [ "$?" = 0 ]
+then
+  echo "Ip encontrado"
+else
+  echo "IP não encontrado"
+fi
+
