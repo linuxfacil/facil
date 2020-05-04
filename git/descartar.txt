@@ -1,0 +1,2 @@
+#Descarta alterações locais
+facil git reset
