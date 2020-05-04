@@ -24,9 +24,9 @@ else
 	export v1=$1
 	export v2=$2
 	export v3=$3
+	export v4=$4
+	
 	#Executa comando
-	
-	
 	bash $diretorio_facil/$1/$2.txt
 	set +xve
 fi

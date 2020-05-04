@@ -4,8 +4,8 @@ echo ......................................................
 echo Instalando o Apache
 echo ......................................................
 
-#Instalar apache2
-apt install -y apache2
+#Instalar apache2 se nao existir
+which apache2 || apt install -y apache2
 
 #Permitir mudar o permalink
 a2enmod rewrite
