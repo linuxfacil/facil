@@ -1,0 +1,5 @@
+
+#Pausar
+read -p "Pressione [Enter] para continuar..."
+
+ 
