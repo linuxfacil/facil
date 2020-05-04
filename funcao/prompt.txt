@@ -4,13 +4,13 @@
 #Padrão ubuntu: \[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\u@\h:\w\$
 
 padrao=\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\u@\h:\w\$
-preto=0;30
-vermelho=0;31
-verde=0;32
-marrom=0;33
-azul=0;34
-roxo=0;35
-cian=0;36
+preto="0;30"
+vermelho="0;31"
+verde="0;32"
+marrom="0;33"
+azul="0;34"
+roxo="0;35"
+cian="0;36"
 
 
 
