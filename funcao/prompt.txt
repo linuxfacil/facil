@@ -3,7 +3,9 @@
 
 #Padrão ubuntu: \[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\u@\h:\w\$
 
-padrao="\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\u@\h:\w\$"
+#sed -i 's;^diretorio_facil=.*;diretorio_facil='$diretorio_facil';' $caminho_local_ini
+atual=$PS1
+padrao="\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\u@\h:\w\$ "
 preto="0;30"
 vermelho="0;31"
 verde="0;32"
