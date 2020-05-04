@@ -12,7 +12,7 @@ echo Muitos programas estão disponíveis apenas via comunidade open-source
 echo Esses programas ficam localizados no repositório "Universe" do Ubuntu
 echo Para ter acesso a esses programas, é necessário habilitar esse repositório
 echo
-echo Você deseja habilitar esse repositório? (S/N)
+echo -n Você deseja habilitar esse repositório? (S/N)
 
 read habilitarepo
 
