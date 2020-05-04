@@ -20,7 +20,8 @@ else
 	
 	#Envia variáveis para o script a ser chamado
 	export diretorio_facil
-	
+	export $1
+	export $2
 	#Executa comando
 	
 	
