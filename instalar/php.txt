@@ -4,6 +4,8 @@ echo ......................................................
 echo Instalando o PHP
 echo ......................................................
 
+facil cabecalho
+
 versaophp=7.4
 caminhophpini=/etc/php/$versaophp/apache2/php.ini
 
