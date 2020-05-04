@@ -1,0 +1,5 @@
+
+#Comandos e variáveis comuns a ser processado no todos dos arquivos
+
+#Exibe comandos e para em qualquer erro
+set -xve
