@@ -3,7 +3,7 @@
 #Carrega as variáveis do arquivo ini local
 . local-facil.ini
 
-. funcoes.txt
+. $diretorio_facil/funcoes.txt
 
 #Se tentar iniciar com 'facil', erro
 if [[ $1 == "iniciar" ]]
