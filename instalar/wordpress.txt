@@ -118,7 +118,7 @@ done
 
 
 #aumentando o limite de memória do Wordpress
-https://www.wpbeginner.com/wp-tutorials/fix-wordpress-memory-exhausted-error-increase-php-memory/
+#https://www.wpbeginner.com/wp-tutorials/fix-wordpress-memory-exhausted-error-increase-php-memory/
 echo "define( 'WP_MEMORY_LIMIT', '256M' );" >> $caminho_wp_config
 
 
