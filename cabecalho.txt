@@ -3,3 +3,7 @@
 
 #Exibe comandos e para em qualquer erro
 set -xve
+
+#Caracter em negrito
+tx_negrito=$(tput bold)
+tx_normal=$(tput sgr0)
