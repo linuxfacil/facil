@@ -22,9 +22,10 @@ else
 	export diretorio_facil
 	
 	#Executa comando
-	echo $0
-	bash $diretorio_facil/$1/$2.txt
 	
+	set -xve
+	bash $diretorio_facil/$1/$2.txt
+	set +xve
 fi
 
 #Manter o shell BASH, independentemente da chamada do Shell (sh ou dash) 
