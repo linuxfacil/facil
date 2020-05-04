@@ -85,8 +85,8 @@ chown -R www-data:www-data $caminho_wp
 find $caminho_wp -type d -exec chmod 750 {} \;
 find $caminho_wp -type f -exec chmod 640 {} \;
 
-	#Adiciona o usuario ubuntu ao grupo de acesso do wordpress
-usermod -a -G www-data ubuntu
+#Adiciona o usuario ubuntu ao grupo de acesso do wordpress
+usermod -a -G www-data $USER
 
 chmod g+w $caminho_wp/wp-content
 chmod -R g+w $caminho_wp/wp-content/themes
@@ -108,7 +108,7 @@ sed -i "s+define( 'NONCE_SALT',       'put your unique phrase here' );++g" $cami
 
 #Acrescentando as novas chaves
 #https://lucrussell.com/script-to-update-wordpress-secret-keys-in-every-wp-config-php/
-find . -name $caminho_wp wp-config.php -print | while read line
+find $caminho_wp -name  wp-config.php -print | while read line
 do 
 	curl http://api.wordpress.org/secret-key/1.1/salt/ > wp_keys.txt
 	sed -i.bak -e '/put your unique phrase here/d' -e '/AUTH_KEY/d' -e '/SECURE_AUTH_KEY/d' -e '/LOGGED_IN_KEY/d' -e '/NONCE_KEY/d' -e '/AUTH_SALT/d' -e '/SECURE_AUTH_SALT/d' -e '/LOGGED_IN_SALT/d' -e '/NONCE_SALT/d' $line
