@@ -1,3 +1,8 @@
+echo 
+echo 
+echo ......................................................
+echo Instalando o Apache
+echo ......................................................
 
 #Instalar apache2
 apt install -y apache2
@@ -22,5 +27,8 @@ else
 	echo Firewall inativo
 fi
 
+#Verifica se está tudo certo com o apache
 apache2ctl configtest
+
+#Reiniciar o apache
 service apache2 restart

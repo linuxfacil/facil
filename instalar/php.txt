@@ -1,11 +1,40 @@
+echo 
+echo 
+echo ......................................................
+echo Instalando o PHP
+echo ......................................................
 
 #Instalando o PHP
-sudo apt install -y php libapache2-mod-php php-mysql php-cli
+#add-apt-repository ppa:ondrej/php  
+#apt update
+
+#Pacotes principais do PHP
+apt install -y php libapache2-mod-php php-mysql php-cli
+
+#Instalando extensões adicionais comuns do PHP
+apt install -y php7.2-curl php7.2-gd php7.2-mbstring php7.2-xml php7.2-xmlrpc php7.2-soap php7.2-intl php7.2-zip php7.2-libsodium php7.2-imagick php7.2-bcmath
+
+#Outras extensões do PHP
+apt install -y libphp-phpmailer #para envio de email
+apt install -y php7.2-imap php-mcrypt #outros modulos uteis a ajustar
+
 
 #Configurando o index.php como arquivo preferencial
-sudo sed -i "s+DirectoryIndex index.html index.cgi index.pl index.php index.xhtml index.htm+DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm+g" /etc/apache2/mods-enabled/dir.conf
-sudo systemctl restart apache2
+sed -i "s+DirectoryIndex index.html index.cgi index.pl index.php index.xhtml index.htm+DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm+g" /etc/apache2/mods-enabled/dir.conf
+    
+#Aumentar limites do php.ini
+sed -i "s+upload_max_filesize = 2M+upload_max_filesize = 256M+g" /etc/php/7.2/apache2/php.ini
+sed -i "s+post_max_size = 8M+post_max_size = 256M+g" /etc/php/7.2/apache2/php.ini
+sed -i "s+max_execution_time = 30+max_execution_time = 600+g" /etc/php/7.2/apache2/php.ini
+sed -i "s+; max_input_vars = 1000+max_input_vars = 2000+g" /etc/php/7.2/apache2/php.ini
 
-#Instalando extensões comuns do PHP
-sudo apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc php-soap php-intl php-zip
-sudo systemctl restart apache2
+#Reiniciar o apache
+systemctl restart apache2
+
+
+
+
+
+
+
+
