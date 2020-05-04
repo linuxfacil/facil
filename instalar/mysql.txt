@@ -21,7 +21,8 @@ else
 	echo Firewall inativo
 fi
 
-mysql -u root -e "CREATE USER 'mysqlroot'@'%';"	 #% dá acesso remoto
-mysql -u root -e "UPDATE mysql.user SET HOST='%' WHERE User='mysqlroot';"
+#mysql -u root -e "CREATE USER 'mysqlroot'@'%';"	 #% dá acesso remoto
+#mysql -u root -e "UPDATE mysql.user SET HOST='%' WHERE User='mysqlroot';"
+
 sed -i "s+bind-address+#bind-address+g" /etc/mysql/mysql.conf.d/mysqld.cnf
 service mysql restart
