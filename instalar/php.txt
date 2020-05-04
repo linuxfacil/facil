@@ -1,8 +1,6 @@
-echo 
-echo 
-echo ......................................................
-echo Instalando o PHP
-echo ......................................................
+
+facil funcao titulo1 "Instalando o PHP"
+
 
 facil cabecalho
 
