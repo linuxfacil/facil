@@ -1,0 +1,138 @@
+
+facil funcao titulo1 "Instalando o Wordpress"
+
+
+facil instalar apache
+facil instalar mysql
+facil instalar php
+
+#Criar o banco de dados que o wordpress irá utilizar
+echo ""
+echo "Digite o nome do $tx_negrito BANCO $tx_normal  que deseja criar no MySql para o wordpress."
+read -p "Deixe em branco para usar o nome do banco padrão [wordpress]:" mysql_banco_wordpress
+
+if [ -z "$mysql_banco_wordpress" ]; then
+	mysql_banco_wordpress=wordpress
+fi
+
+
+mysql -u root -e "CREATE DATABASE $mysql_banco_wordpress DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;"
+
+#mysql_banco_wordpress=${mysql_banco_wordpress:-wordpress}
+echo ""
+echo Nome do $tx_negrito banco $tx_normal escolhido: $mysql_banco_wordpress
+echo ""
+	
+
+
+#Criar o usuário de dados que o wordpress irá utilizar
+echo ""
+echo "Digite o nome do $tx_negrito USUÁRIO DO BANCO $tx_normal  que deseja criar no MySql para o wordpress."
+read -p "Deixe em branco para usar o nome do banco padrão [wpuser]:" mysql_banco_wpuser
+mysql_banco_wpuser=${mysql_banco_wpuser:-wpuser}
+echo ""
+echo Nome do $tx_negrito usuário $tx_normal escolhido: $mysql_banco_wpuser
+echo ""
+
+#Definição da senha para o usuário do wordpress no MySql
+echo ""
+echo "Digite uma $tx_negrito SENHA $tx_normal para o usuário do Mysql para wordpress"
+echo "ou uma senha aleatória será gerada para você."
+read mysql_senha
+if [ -z "$mysql_senha" ]; then
+	mysql_senha=$(openssl rand -hex 8)
+	echo a senha gerada para o postgres é: $mysql_senha 
+	echo Guarde essa senha em um lugar seguro. Ela não será informada novamente.
+	echo ""
+fi
+read -r -p "Pressione [Enter] para continuar ..." key 	
+echo ""
+	
+mysql -u root -e "CREATE USER '$mysql_banco_wpuser'@'%' IDENTIFIED BY '$mysql_senha';"	
+mysql -u root -e "GRANT ALL PRIVILEGES ON $mysql_banco_wordpress.* TO '$mysql_banco_wpuser'@'%';"
+#mysql -u root -e "ALTER USER '$mysql_banco_wpuser'@'%' IDENTIFIED BY 'NEW_USER_PASSWORD';"
+mysql -u root -e "FLUSH PRIVILEGES;"	
+
+
+#Permitir o uso do .htaccess
+sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride all/' /etc/apache2/apache2.conf
+	
+
+#Definir diretório onde o wordpress será instalado
+echo ""
+echo "Digite o nome do $tx_negrito DIRETÓRIO $tx_normal  onde o wordpress será instalado."
+read -p "Deixe em branco para usar o nome do banco padrão [/html]:" html
+wp_diretorio=${wp_diretorio:-html}
+echo ""
+echo Nome do $tx_negrito diretório $tx_normal escolhido: $wp_diretorio
+echo ""
+
+caminho_wp=/var/www/$wp_diretorio
+
+
+#Binários do wordpress
+cd /tmp
+curl -O https://wordpress.org/latest.tar.gz
+tar xzvf latest.tar.gz
+touch /tmp/wordpress/.htaccess
+chmod 660 /tmp/wordpress/.htaccess
+cp /tmp/wordpress/wp-config-sample.php /tmp/wordpress/wp-config.php
+
+mkdir /tmp/wordpress/wp-content/upgrade
+cp -a /tmp/wordpress/. $caminho_wp
+chown -R www-data:www-data $caminho_wp
+
+find $caminho_wp -type d -exec chmod 750 {} \;
+find $caminho_wp -type f -exec chmod 640 {} \;
+
+	#Adiciona o usuario ubuntu ao grupo de acesso do wordpress
+usermod -a -G www-data ubuntu
+
+chmod g+w $caminho_wp/wp-content
+chmod -R g+w $caminho_wp/wp-content/themes
+chmod -R g+w $caminho_wp/wp-content/plugins
+chown -R www-data $caminho_wp
+
+caminho_wp_config=$caminho_wp/wp-config.php
+
+#Chaves únicas
+#Limpando linhas de chaves vazias
+sed -i "s+define( 'AUTH_KEY',         'put your unique phrase here' );++g" $caminho_wp_config
+sed -i "s+define( 'SECURE_AUTH_KEY',  'put your unique phrase here' );++g" $caminho_wp_config
+sed -i "s+define( 'LOGGED_IN_KEY',    'put your unique phrase here' );++g" $caminho_wp_config
+sed -i "s+define( 'NONCE_KEY',        'put your unique phrase here' );++g" $caminho_wp_config
+sed -i "s+define( 'AUTH_SALT',        'put your unique phrase here' );++g" $caminho_wp_config
+sed -i "s+define( 'SECURE_AUTH_SALT', 'put your unique phrase here' );++g" $caminho_wp_config
+sed -i "s+define( 'LOGGED_IN_SALT',   'put your unique phrase here' );++g" $caminho_wp_config
+sed -i "s+define( 'NONCE_SALT',       'put your unique phrase here' );++g" $caminho_wp_config
+
+#Acrescentando as novas chaves
+#https://lucrussell.com/script-to-update-wordpress-secret-keys-in-every-wp-config-php/
+find . -name $caminho_wp wp-config.php -print | while read line
+do 
+	curl http://api.wordpress.org/secret-key/1.1/salt/ > wp_keys.txt
+	sed -i.bak -e '/put your unique phrase here/d' -e '/AUTH_KEY/d' -e '/SECURE_AUTH_KEY/d' -e '/LOGGED_IN_KEY/d' -e '/NONCE_KEY/d' -e '/AUTH_SALT/d' -e '/SECURE_AUTH_SALT/d' -e '/LOGGED_IN_SALT/d' -e '/NONCE_SALT/d' $line
+	cat wp_keys.txt >> $line
+	rm wp_keys.txt
+done
+
+
+#aumentando o limite de memória do Wordpress
+https://www.wpbeginner.com/wp-tutorials/fix-wordpress-memory-exhausted-error-increase-php-memory/
+echo "define( 'WP_MEMORY_LIMIT', '256M' );" >> $caminho_wp_config
+
+
+sed -i "s+define( 'DB_NAME', 'database_name_here' );+define('DB_NAME', '$mysql_banco_wordpress');+g" $caminho_wp_config
+sed -i "s+define( 'DB_USER', 'username_here' );+define( 'DB_USER', '$mysql_banco_wpuser' );+g" $caminho_wp_config
+sed -i "s+define( 'DB_PASSWORD', 'password_here' );+define( 'DB_PASSWORD', '$mysql_senha' );+g" $caminho_wp_config
+sed -i "s+define( 'DB_HOST', 'localhost' );+define( 'DB_HOST', 'localhost' );+g" $caminho_wp_config
+
+
+
+echo php_value upload_max_filesize 256M  >> $caminho_wp/.htaccess
+echo php_value post_max_size 256M >> $caminho_wp/.htaccess
+echo php_value memory_limit 512M >> $caminho_wp/.htaccess
+echo php_value max_input_time 180 >> $caminho_wp/.htaccess
+echo php_value max_execution_time 180 >> $caminho_wp/.htaccess
+
+service apache2 restart
