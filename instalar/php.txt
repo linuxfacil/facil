@@ -4,6 +4,8 @@ echo ......................................................
 echo Instalando o PHP
 echo ......................................................
 
+set -xve
+
 #Instalando o PHP
 #add-apt-repository ppa:ondrej/php  
 #apt update
