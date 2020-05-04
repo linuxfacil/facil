@@ -1,0 +1,27 @@
+facil funcao titulo1 "Instalando o MySql" 
+
+#Instalar o MySql, caso ele não exista
+which mysql-server || apt install -y mysql-server
+
+#mysql_secure_installation
+#mysqld --initialize
+#systemctl status mysql.service
+
+#Ajustar Firewall
+ufw allow 3306/tcp #mysql
+ufw allow 22/tcp 
+
+
+if [[ $(facil status ufw) == "active" ]] 
+then
+	ufw disable
+	ufw --force enable
+	echo Firewall ativado
+else
+	echo Firewall inativo
+fi
+
+mysql -u root -e "CREATE USER 'mysqlroot'@'%';"	 #% dá acesso remoto
+mysql -u root -e "UPDATE mysql.user SET HOST='%' WHERE User='mysqlroot';"
+sed -i "s+bind-address+#bind-address+g" /etc/mysql/mysql.conf.d/mysqld.cnf
+service mysql restart
