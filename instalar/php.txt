@@ -17,11 +17,14 @@ apt update
 apt install -y php libapache2-mod-php php-mysql php-cli
 
 #Instalando extensões adicionais comuns do PHP
-apt install -y php$versaophp-curl php$versaophp-gd php$versaophp-mbstring php$versaophp-xml php$versaophp-xmlrpc php$versaophp-soap php$versaophp-intl php$versaophp-zip php$versaophp-libsodium php-imagick php$versaophp-bcmath
+apt install -y php$versaophp-curl php$versaophp-gd php$versaophp-mbstring php$versaophp-xml php$versaophp-xmlrpc php$versaophp-soap php$versaophp-intl php$versaophp-zip php-imagick php$versaophp-bcmath
 
 #Outras extensões do PHP
 apt install -y libphp-phpmailer #para envio de email
 apt install -y php$versaophp-imap php7.1-mcrypt #outros modulos uteis a ajustar
+
+#Ultima versão do sodium (criptografia)
+php-sodium php7.1-cli php7.1-common php7.1-json php7.1-opcache php7.1-phpdbg php7.1-readline
 
 
 #Configurando o index.php como arquivo preferencial
