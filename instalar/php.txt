@@ -1,0 +1,11 @@
+
+#Instalando o PHP
+sudo apt install -y php libapache2-mod-php php-mysql php-cli
+
+#Configurando o index.php como arquivo preferencial
+sudo sed -i "s+DirectoryIndex index.html index.cgi index.pl index.php index.xhtml index.htm+DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm+g" /etc/apache2/mods-enabled/dir.conf
+sudo systemctl restart apache2
+
+#Instalando extensões comuns do PHP
+sudo apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc php-soap php-intl php-zip
+sudo systemctl restart apache2
