@@ -135,6 +135,9 @@ printf "<VirtualHost *:80>
 
 sudo a2ensite $wp_diretorio.conf
 
+#Sites ativos no apache
+echo "Sites ativos no apache"
+ls /etc/apache2/sites-enabled/ -l
 
 #echo php_value upload_max_filesize 256M  >> $caminho_wp/.htaccess
 #echo php_value post_max_size 256M >> $caminho_wp/.htaccess

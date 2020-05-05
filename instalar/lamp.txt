@@ -1,0 +1,6 @@
+
+facil funcao titulo1 "Instalando LAMP"
+
+facil instalar apache
+facil instalar mysql
+facil instalar php

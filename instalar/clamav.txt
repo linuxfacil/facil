@@ -1,0 +1,13 @@
+
+facil funcao titulo1 "Instalando o Clamav antivirus"
+
+	#Clamav antivirus
+	#Run Idle: ionice -c3 nice -n 19 /usr/bin/clamscan -r /
+	#https://rsmitty.github.io/clamscan-files-by-date/
+	#sudo nice -n 5 find / -name "*" -not -path "/proc/*" -not -path "/sys/*" -not -path "/dev/*" -ctime -7 -type f ! -size 0 -print0 | sudo nice -n 10  xargs -0 clamscan --quiet --log=/home/ubuntu/clamscan.log
+
+apt -y install clamav clamav-daemon
+systemctl stop clamav-freshclam
+freshclam
+systemctl start clamav-freshclam
+
