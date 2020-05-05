@@ -21,8 +21,15 @@ else
 	echo Firewall inativo
 fi
 
-#mysql -u root -e "CREATE USER 'mysqlroot'@'%';"	 #% dá acesso remoto
-#mysql -u root -e "UPDATE mysql.user SET HOST='%' WHERE User='mysqlroot';"
+
 
 sed -i "s+bind-address+#bind-address+g" /etc/mysql/mysql.conf.d/mysqld.cnf
 service mysql restart
+
+#Comandos comuns
+#mysql -u root -e "CREATE USER 'mysqlroot'@'%';"	 #% dá acesso remoto
+#mysql -u root -e "UPDATE mysql.user SET HOST='%' WHERE User='mysqlroot';"
+#mysql -u root -e "CREATE USER '$mysql_banco_wpuser'@'%' IDENTIFIED BY '$mysql_senha';"	
+#mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO 'mysqlroot'@'%';"
+#mysql -u root -e "ALTER USER 'mysqlroot'@'%' IDENTIFIED BY 'mysql_senha';"
+#mysql -u root -e "FLUSH PRIVILEGES;"
