@@ -16,7 +16,7 @@ facil instalar repo-ubuntu-universe
 apt update
 
 #Pacotes principais do PHP
-apt install -y php libapache2-mod-php  php-cli
+which php || apt install -y php libapache2-mod-php  php-cli
 
 #Instalando extensões adicionais comuns do PHP
 #apt remove flush -y php$versaophp-curl php$versaophp-gd php$versaophp-mbstring php$versaophp-xml php$versaophp-xmlrpc php$versaophp-soap php$versaophp-intl php$versaophp-zip php-imagick php$versaophp-bcmath

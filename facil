@@ -3,6 +3,7 @@
 #Carrega as variáveis do arquivo ini local
 . local-facil.ini
 
+
 #Se tentar iniciar com 'facil', erro
 if [[ $1 == "iniciar" ]]
 then 
@@ -27,6 +28,7 @@ else
 	export v4=$4
 	
 	#Executa comando
+	bash . cabecalho.txt
 	bash $diretorio_facil/$1/$2.txt
 	set +xve
 fi

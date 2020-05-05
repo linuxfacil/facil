@@ -15,14 +15,8 @@ a2enmod headers
 ufw allow in "Apache Full"
 ufw allow 22/tcp
 
-if [[ $(facil status ufw) == "active" ]] 
-then
-	ufw disable
-	ufw --force enable
-	echo Firewall ativado
-else
-	echo Firewall inativo
-fi
+#Reinicia UFW se estiver ativo
+facil funcao reiniciar_ufw
 
 #Verifica se está tudo certo com o apache
 apache2ctl configtest

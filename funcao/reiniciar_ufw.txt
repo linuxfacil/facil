@@ -1,5 +1,7 @@
 
 #Reinicia UFW se estiver ativo
+#Uso facil funcao reiniciar_ufw
+
 if [[ $(facil status ufw) == "active" ]] 
 then
 	ufw disable
