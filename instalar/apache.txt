@@ -1,8 +1,5 @@
-echo 
-echo 
-echo ......................................................
-echo Instalando o Apache
-echo ......................................................
+
+facil funcao titulo1 "Instalando o Apache"
 
 #Instalar apache2 se nao existir
 which apache2 || apt install -y apache2
