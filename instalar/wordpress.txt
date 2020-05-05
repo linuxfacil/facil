@@ -73,6 +73,7 @@ caminho_wp=/var/www/$wp_diretorio
 #Binários do wordpress
 cd /tmp
 curl -O https://wordpress.org/latest.tar.gz
+rm -rf /tmp/wordpress
 tar xzvf latest.tar.gz
 touch /tmp/wordpress/.htaccess
 chmod 660 /tmp/wordpress/.htaccess
@@ -96,44 +97,48 @@ chown -R www-data $caminho_wp
 
 caminho_wp_config=$caminho_wp/wp-config.php
 
-#Chaves únicas
-#Limpando linhas de chaves vazias
-sed -i "s+define( 'AUTH_KEY',         'put your unique phrase here' );++g" $caminho_wp_config
-sed -i "s+define( 'SECURE_AUTH_KEY',  'put your unique phrase here' );++g" $caminho_wp_config
-sed -i "s+define( 'LOGGED_IN_KEY',    'put your unique phrase here' );++g" $caminho_wp_config
-sed -i "s+define( 'NONCE_KEY',        'put your unique phrase here' );++g" $caminho_wp_config
-sed -i "s+define( 'AUTH_SALT',        'put your unique phrase here' );++g" $caminho_wp_config
-sed -i "s+define( 'SECURE_AUTH_SALT', 'put your unique phrase here' );++g" $caminho_wp_config
-sed -i "s+define( 'LOGGED_IN_SALT',   'put your unique phrase here' );++g" $caminho_wp_config
-sed -i "s+define( 'NONCE_SALT',       'put your unique phrase here' );++g" $caminho_wp_config
+#Muda as chaves de segurança da nova loja
+SALT=$(curl -L https://api.wordpress.org/secret-key/1.1/salt/)
+STRING='put your unique phrase here'
+printf '%s\n' "g/$STRING/d" a "$SALT" . w | ed -s $caminho_wp_config
 
-#Acrescentando as novas chaves
-#https://lucrussell.com/script-to-update-wordpress-secret-keys-in-every-wp-config-php/
-find $caminho_wp -name  wp-config.php -print | while read line
-do 
-	curl http://api.wordpress.org/secret-key/1.1/salt/ > wp_keys.txt
-	sed -i.bak -e '/put your unique phrase here/d' -e '/AUTH_KEY/d' -e '/SECURE_AUTH_KEY/d' -e '/LOGGED_IN_KEY/d' -e '/NONCE_KEY/d' -e '/AUTH_SALT/d' -e '/SECURE_AUTH_SALT/d' -e '/LOGGED_IN_SALT/d' -e '/NONCE_SALT/d' $line
-	cat wp_keys.txt >> $line
-	rm wp_keys.txt
-done
-
-
-#aumentando o limite de memória do Wordpress
-#https://www.wpbeginner.com/wp-tutorials/fix-wordpress-memory-exhausted-error-increase-php-memory/
-echo "define( 'WP_MEMORY_LIMIT', '256M' );" >> $caminho_wp_config
-
-
+#ajustando dados de conexão
 sed -i "s+define( 'DB_NAME', 'database_name_here' );+define('DB_NAME', '$mysql_banco_wordpress');+g" $caminho_wp_config
 sed -i "s+define( 'DB_USER', 'username_here' );+define( 'DB_USER', '$mysql_banco_wpuser' );+g" $caminho_wp_config
 sed -i "s+define( 'DB_PASSWORD', 'password_here' );+define( 'DB_PASSWORD', '$mysql_senha' );+g" $caminho_wp_config
 sed -i "s+define( 'DB_HOST', 'localhost' );+define( 'DB_HOST', 'localhost' );+g" $caminho_wp_config
 
+#aumentando o limite de memória do Wordpress
+#https://www.wpbeginner.com/wp-tutorials/fix-wordpress-memory-exhausted-error-increase-php-memory/
+echo "define( 'WP_MEMORY_LIMIT', '256M' );" >> $caminho_wp_config
+
+#Ajustando permissões de segurança
+printf "<Files *.php> \n deny from all \n</Files>\n" > $caminho_wp/wp-content/uploads/.htaccess
+printf "<Files *.php> \n deny from all \n</Files>\n" > $caminho_wp/wp-includes/.htaccess
+
+#Ajustar arquivos de hosts do apache
+printf "<VirtualHost *:80>
+    ServerAdmin admin@test.com
+    ServerName $wp_diretorio
+    ServerAlias www.$wp_diretorio
+    DocumentRoot $pathnewstore
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+
+<Directory $pathnewstore/>
+    AllowOverride All
+</Directory>
+
+" > /etc/apache2/sites-available/$wp_diretorio.conf
+
+sudo a2ensite $wp_diretorio.conf
 
 
-echo php_value upload_max_filesize 256M  >> $caminho_wp/.htaccess
-echo php_value post_max_size 256M >> $caminho_wp/.htaccess
-echo php_value memory_limit 512M >> $caminho_wp/.htaccess
-echo php_value max_input_time 180 >> $caminho_wp/.htaccess
-echo php_value max_execution_time 180 >> $caminho_wp/.htaccess
+#echo php_value upload_max_filesize 256M  >> $caminho_wp/.htaccess
+#echo php_value post_max_size 256M >> $caminho_wp/.htaccess
+#echo php_value memory_limit 512M >> $caminho_wp/.htaccess
+#echo php_value max_input_time 180 >> $caminho_wp/.htaccess
+#echo php_value max_execution_time 180 >> $caminho_wp/.htaccess
 
-service apache2 restart
+service apache2 restart graceful
