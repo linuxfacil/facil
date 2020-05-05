@@ -61,7 +61,7 @@ sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOve
 #Definir diretório onde o wordpress será instalado
 echo ""
 echo "Digite o nome do $tx_negrito DIRETÓRIO $tx_normal  onde o wordpress será instalado."
-read -p "Deixe em branco para usar o nome do banco padrão [/html]:" html
+read -p "Deixe em branco para usar o nome do banco padrão [/html]:" wp_diretorio
 wp_diretorio=${wp_diretorio:-html}
 echo ""
 echo Nome do $tx_negrito diretório $tx_normal escolhido: $wp_diretorio
