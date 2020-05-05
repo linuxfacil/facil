@@ -28,7 +28,7 @@ else
 	export v4=$4
 	
 	#Executa comando
-	bash . cabecalho.txt
+	bash $diretorio_facil/cabecalho.txt
 	bash $diretorio_facil/$1/$2.txt
 	set +xve
 fi
