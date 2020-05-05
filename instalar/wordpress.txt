@@ -122,7 +122,7 @@ printf "<VirtualHost *:80>
     ServerAdmin admin@test.com
     ServerName $wp_diretorio
     ServerAlias www.$wp_diretorio
-    DocumentRoot $pathnewstore
+    DocumentRoot $caminho_wp
     ErrorLog ${APACHE_LOG_DIR}/error.log
     CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
