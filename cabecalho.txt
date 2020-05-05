@@ -1,8 +1,8 @@
 
 #Comandos e variáveis comuns a ser processado no todos dos arquivos
 
-#Exibe comandos e para em qualquer erro
-set -xve
+#Para em qualquer erro
+set -e
 
 #Caracter em negrito/normal
 tx_negrito=$(tput bold)
