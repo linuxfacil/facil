@@ -7,7 +7,7 @@ facil cabecalho
 versaophp=7.2
 caminhophpini=/etc/php/$versaophp/apache2/php.ini
 
-facil instalar repo-ubuntu-universe
+#facil instalar repo-ubuntu-universe
 
 #Adicionando ppa
 #add-apt-repository ppa:ondrej/php  
