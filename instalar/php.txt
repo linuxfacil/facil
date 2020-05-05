@@ -24,10 +24,7 @@ apt install -y php$versaophp-mysql php$versaophp-curl php$versaophp-gd php$versa
 
 #Outras extensões do PHP
 apt install -y libphp-phpmailer #para envio de email
-apt install -y php$versaophp-imap php7.1-mcrypt #outros modulos uteis a ajustar
-
-#Ultima versão do sodium (criptografia)
-apt install -y php-sodium 
+apt install -y php$versaophp-imap  #para ler email imap
 
 
 #Configurando o index.php como arquivo preferencial
