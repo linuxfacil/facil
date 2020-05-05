@@ -20,8 +20,8 @@ ufw allow 22/tcp
 
 if [[ $(facil status ufw) == "active" ]] 
 then
-	#ufw disable
-	#ufw --force enable
+	ufw disable
+	ufw --force enable
 	echo Firewall ativado
 else
 	echo Firewall inativo
