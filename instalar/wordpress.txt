@@ -72,7 +72,7 @@ caminho_wp=/var/www/$wp_diretorio
 
 #Binários do wordpress
 cd /tmp
-curl -O https://wordpress.org/latest.tar.gz
+											#curl -O https://wordpress.org/latest.tar.gz
 rm -rf /tmp/wordpress
 tar xzvf latest.tar.gz
 touch /tmp/wordpress/.htaccess
@@ -80,6 +80,7 @@ chmod 660 /tmp/wordpress/.htaccess
 cp /tmp/wordpress/wp-config-sample.php /tmp/wordpress/wp-config.php
 
 mkdir /tmp/wordpress/wp-content/upgrade
+mkdir /tmp/wordpress/wp-content/uploads
 mkdir $caminho_wp
 cp -a /tmp/wordpress/. $caminho_wp
 chown -R www-data:www-data $caminho_wp
