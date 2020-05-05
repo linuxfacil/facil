@@ -4,7 +4,7 @@ facil titulo1 "Instalando o PhpMyAdmin"
 which phpmyadmin || apt install -y phpmyadmin php-mbstring php-gettext 
 
 ufw allow 80/tcp 
+
+#Reinicia UFW se estiver ativo
 facil funcao reiniciar_ufw
-
-
 

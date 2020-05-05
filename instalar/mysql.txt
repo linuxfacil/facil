@@ -11,16 +11,8 @@ which mysql-server || apt install -y mysql-server
 ufw allow 3306/tcp #mysql
 ufw allow 22/tcp 
 
-
-if [[ $(facil status ufw) == "active" ]] 
-then
-	ufw disable
-	ufw --force enable
-	echo Firewall ativado
-else
-	echo Firewall inativo
-fi
-
+#Reinicia UFW se estiver ativo
+facil funcao reiniciar_ufw
 
 
 sed -i "s+bind-address+#bind-address+g" /etc/mysql/mysql.conf.d/mysqld.cnf
