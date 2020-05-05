@@ -72,7 +72,7 @@ caminho_wp=/var/www/$wp_diretorio
 
 #Binários do wordpress
 cd /tmp
-											#curl -O https://wordpress.org/latest.tar.gz
+curl -O https://wordpress.org/latest.tar.gz
 rm -rf /tmp/wordpress
 tar xzvf latest.tar.gz
 touch /tmp/wordpress/.htaccess
