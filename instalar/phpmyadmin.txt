@@ -8,3 +8,6 @@ ufw allow 80/tcp
 #Reinicia UFW se estiver ativo
 facil funcao reiniciar_ufw
 
+#Corrige BUG informado abaixo
+#https://medium.com/@chaloemphonthipkasorn/fix-bug-phpmyadmin-sql-lib-php-php7-2-ubuntu-16-04-836049630a40
+sed -i "s/|\s*\((count(\$analyzed_sql_results\['select_expr'\]\)/| (\1)/g" /usr/share/phpmyadmin/libraries/sql.lib.php
