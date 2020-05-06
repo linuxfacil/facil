@@ -1,0 +1,6 @@
+
+#Uso
+#facil info portas
+
+#Ver portas que estão sendo utilizadas.	
+netstat -plntu

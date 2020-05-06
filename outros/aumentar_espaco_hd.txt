@@ -1,0 +1,15 @@
+
+facil funcao titulo1 "Efetuando limpezas gerais"
+
+
+	#Remove eventuais arquivos de trava
+if [ -d "/var/lib/apt/lists/lock" ]; then 	rm -r /var/lib/apt/lists/lock ; fi
+if [ -d "/var/lib/dpkg/lock" ]; then rm -r /var/lib/dpkg/lock ; fi
+if [ -d "/var/cache/apt/archives/lock" ]; then 	rm -r /var/cache/apt/archives/lock ; fi
+if [ -d "/var/lib/dpkg/lock-frontend" ]; then rm -r /var/lib/dpkg/lock-frontend ; fi
+
+#Limpar pacotes desnecessários	
+apt -y autoremove
+apt -y autoclean
+apt -y clean
+du -sh /var/cache/apt 

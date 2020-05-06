@@ -4,6 +4,18 @@
 . local-facil.ini
 
 
+
+#Verifica se a versão do Ubuntu é compatível
+
+#Versão mínima requerida do Ubuntu (sem pontução "." Ex: 1604)
+ubuntu_minimo=1801 
+ubuntu_versao=$( lsb_release -r | awk '{ print $2 }' | sed 's/[.]//' )
+
+if [ $ubuntu_versao -lt $ubuntu_minimo ]; then
+        echo "A versão do seu Ubuntu ($ubuntu_versao) é inferior à versão recomendada ($ubuntu_minimo)."
+        #exit 1
+fi
+
 #Se tentar iniciar com 'facil', erro
 if [[ $1 == "iniciar" ]]
 then 

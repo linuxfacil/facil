@@ -9,14 +9,26 @@ which mysql-server || apt install -y mysql-server
 
 #Ajustar Firewall
 ufw allow 3306/tcp #mysql
-ufw allow 22/tcp 
 
 #Reinicia UFW se estiver ativo
 facil funcao reiniciar_ufw
 
-
 sed -i "s+bind-address+#bind-address+g" /etc/mysql/mysql.conf.d/mysqld.cnf
 service mysql restart
+
+
+#Se for acessar um banco externo
+#apt install mysql-client-core-5.7 (apenas cliente para banco externo)
+
+#Configuração de acesso externo seguro
+#touch /etc/my.cnf
+#chmod 0600 /etc/my.cnf
+#[client]
+#host=
+#user=
+#password=
+
+
 
 #Comandos comuns
 #mysql -u root -e "CREATE USER 'mysqlroot'@'%';"	 #% dá acesso remoto

@@ -1,6 +1,12 @@
 
 facil funcao titulo1 "Instalando o Wordpress"
 
+#Ref: https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-with-lamp-on-ubuntu-18-04-pt
+
+#Update todos os plugins de todos os sites
+#https://guides.wp-bullet.com/autoupdate-wordpress-site-plugins-wp-cli-bash-script-cronjob/
+#https://github.com/keesiemeijer/wp-update
+
 
 facil instalar apache
 facil instalar mysql
@@ -83,8 +89,9 @@ mkdir /tmp/wordpress/wp-content/upgrade
 mkdir /tmp/wordpress/wp-content/uploads
 mkdir $caminho_wp
 cp -a /tmp/wordpress/. $caminho_wp
-chown -R www-data:www-data $caminho_wp
 
+#Ajustando permissões do diretório do wordpress
+chown -R www-data:www-data $caminho_wp
 find $caminho_wp -type d -exec chmod 750 {} \;
 find $caminho_wp -type f -exec chmod 640 {} \;
 
@@ -117,6 +124,8 @@ echo "define( 'WP_MEMORY_LIMIT', '256M' );" >> $caminho_wp_config
 printf "<Files *.php> \n deny from all \n</Files>\n" > $caminho_wp/wp-content/uploads/.htaccess
 printf "<Files *.php> \n deny from all \n</Files>\n" > $caminho_wp/wp-includes/.htaccess
 
+#Multiplos domínios em um único host
+#Ref: https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-hosts-on-ubuntu-18-04
 #Ajustar arquivos de hosts do apache
 printf "<VirtualHost *:80>
     ServerAdmin admin@test.com
@@ -127,7 +136,7 @@ printf "<VirtualHost *:80>
     CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 
-<Directory $pathnewstore/>
+<Directory $wp_diretorio/>
     AllowOverride All
 </Directory>
 

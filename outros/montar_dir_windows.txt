@@ -1,4 +1,6 @@
-#Referência https://websiteforstudents.com/mount-windows-shares-everyone-ubuntu-17-04-17-10/
+#Referências:
+# https://websiteforstudents.com/mount-windows-shares-everyone-ubuntu-17-04-17-10/
+# https://linuxize.com/post/how-to-mount-cifs-windows-share-on-linux/
 
 #linux
 ponto_montagem=/mnt/win
@@ -10,13 +12,21 @@ nome_usuario=nulo
 senha_usuario=nulo
 
 #Instalar CIFS e SMBFS
-apt-get -y install cifs-utils
+which cifs-utils || apt-get -y install cifs-utils
 
 #Criar ponto de montagem no linux
-mkdir $ponto_montagem
+mkdir -p $ponto_montagem
 
-sudo chown -R nobody:nogroup $ponto_montagem
-sudo chmod -R 0777 $ponto_montagem
+chown -R nobody:nogroup $ponto_montagem
+chmod -R 0777 $ponto_montagem
 
 echo "Facil:Pasta compartilhada do windows" >> /etc/fstab
-echo //$ip_windows/$pasta_compartilhada $ponto_montagem cifs username=$nome_usuario,password=$senha_usuario,uid=nobody,iocharset=utf8,noperm 0 0 >> /etc/fstab
+echo //$ip_windows/$pasta_compartilhada $ponto_montagem cifs username=$nome_usuario,password=$senha_usuario,sec=ntlm,uid=nobody,iocharset=utf8,noperm 0 0 >> /etc/fstab
+
+
+
+#Verificar
+#uid=1000,x-systemd.automount,noauto   
+
+#Na linha de comando
+#mount -t cifs //192.168.120.231/paygo/Req /mnt/loja21/Req -o uid=1000,iocharset=utf8,username="user",password="senha",sec=ntlm

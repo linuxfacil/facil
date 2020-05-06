@@ -1,0 +1,27 @@
+
+facil funcao titulo1 "Instalando aplicativos recomendados"
+
+
+
+
+
+facil funcao titulo2 "Adicionando o Repositório Universe"
+#Adicionar outros repositorios úteis 
+#Leia mais em: https://help.ubuntu.com/community/Repositories/Ubuntu
+add-apt-repository universe
+
+facil funcao titulo2 "Instalando Zip e Unzip"
+apt -y install zip unzip		#zip / unzip
+
+facil funcao titulo2 "Instalando Calculadora básica"
+apt -y install bc				
+
+facil funcao titulo2 "Instalando Htop"
+#Gerenciador de tarefas visual. Melhor que o comando 'top'
+apt -y install htop				
+
+facil funcao titulo2 "Instalando Open-ssh"
+apt -y install openssh-server	
+
+facil funcao titulo2 "Instalando Make - para compilação de programas"
+apt install make

@@ -13,6 +13,10 @@ sudo () {
 super_usuario
 }
 
+#Verifica se o script está sendo rodado como root/sudo.
+#if [ "$(id -u)" -ne 0 ] ; then echo "Por favor, execute o script como super-usuário sudo/root." ; exit 1 ; fi 
+
+
 
 $1
 

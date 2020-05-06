@@ -1,0 +1,8 @@
+
+#Uso
+#facil info internet
+
+#Instala o speedtest-cli se nao existir
+which speedtest-cli || apt-get install speedtest-cli
+
+speedtest-cli --simple --bytes

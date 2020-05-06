@@ -1,6 +1,6 @@
 
 #Uso
-#faci info ping [ip]
+#facil info ping [ip]
 
 #Instala o fping se nao existir
 which fping || apt-get install fping
