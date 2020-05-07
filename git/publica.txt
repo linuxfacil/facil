@@ -1,0 +1,4 @@
+#Publica alterações locais
+git add *
+git commit -m "$v3"
+git push

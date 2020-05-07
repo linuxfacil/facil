@@ -1,0 +1,24 @@
+
+hds () {
+	echo ----------------------------------
+	echo  Uso das partições e HDs montados
+	echo ----------------------------------
+	df -h
+
+	echo ------------------
+	echo  Detalhes dos HDs
+	echo ------------------
+	
+	blkid
+
+	echo --------------------------
+	echo  Estrutura lógica dos HDs
+	echo --------------------------
+	
+	lsblk
+	
+	echo 
+
+}
+
+$1

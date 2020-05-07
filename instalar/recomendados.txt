@@ -20,8 +20,14 @@ facil funcao titulo2 "Instalando Htop"
 #Gerenciador de tarefas visual. Melhor que o comando 'top'
 apt -y install htop				
 
-facil funcao titulo2 "Instalando Open-ssh"
+facil funcao titulo2 "Instalando Openssh-server"
 apt -y install openssh-server	
 
 facil funcao titulo2 "Instalando Make - para compilação de programas"
 apt install make
+
+facil funcao titulo2 "Instalando Git"
+apt install git
+
+facil funcao titulo2 "Instalando Curl"
+apt install curl

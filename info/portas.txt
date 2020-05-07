@@ -4,3 +4,4 @@
 
 #Ver portas que estão sendo utilizadas.	
 netstat -plntu
+sudo lsof -i -P -n | grep LISTEN
