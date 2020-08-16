@@ -1,7 +1,3 @@
-#RECOMENDADOS DESKTOP
-flameshot 	#captura de tela
-wp 			#alternativa office
-
 
 
 #LETS ENCRYPT

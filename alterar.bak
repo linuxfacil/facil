@@ -1,0 +1,22 @@
+
+horario () {
+
+
+echo "Selecione a região ************"
+echo "  1)[-3h] Brasília / São Paulo / Rio de Janeiro / Sudeste / Sul / Nordeste / etc."
+echo "  2)[-4h] Amazonas / Roraima / Rondônia / Mato Grosso / Mato Grosso do Sul"
+echo "  3)[-5h] Acre"
+echo "  4)[-2h] Fernando de Noronha" 
+
+read n
+case $n in
+  1) echo "You chose Option 1";;
+  2) echo "You chose Option 2";;
+  3) echo "You chose Option 3";;
+  4) echo "You chose Option 4";;
+  *) echo "invalid option";;
+esac
+
+}
+
+$1

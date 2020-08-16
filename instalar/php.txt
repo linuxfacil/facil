@@ -20,7 +20,25 @@ which php || apt install -y php libapache2-mod-php  php-cli
 
 #Instalando extensões adicionais comuns do PHP
 #apt remove flush -y php$versaophp-curl php$versaophp-gd php$versaophp-mbstring php$versaophp-xml php$versaophp-xmlrpc php$versaophp-soap php$versaophp-intl php$versaophp-zip php-imagick php$versaophp-bcmath
-apt install -y php$versaophp-mysql php$versaophp-curl php$versaophp-gd php$versaophp-mbstring php$versaophp-xml php$versaophp-xmlrpc php$versaophp-soap php$versaophp-intl php$versaophp-zip php-imagick php$versaophp-bcmath
+apt install -y php$versaophp-mysql         
+apt install -y  php$versaophp-curl
+apt install -y php$versaophp-gd
+apt install -y php$versaophp-mbstring
+apt install -y php$versaophp-xml
+apt install -y php$versaophp-xmlrpc
+apt install -y php$versaophp-soap
+apt install -y php$versaophp-intl
+apt install -y php$versaophp-zip
+apt install -y php$versaophp-imagick
+apt install -y php$versaophp-bcmath
+apt install -y php-pear
+
+
+
+
+
+
+
 
 #Outras extensões do PHP
 apt install -y libphp-phpmailer #para envio de email
@@ -31,6 +49,7 @@ apt install -y php$versaophp-imap  #para ler email imap
 sed -i "s+DirectoryIndex index.html index.cgi index.pl index.php index.xhtml index.htm+DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm+g" /etc/apache2/mods-enabled/dir.conf
     
 #Aumentar limites do php.ini
+cp $caminhophpini $caminhophpini.bak
 sed -i "s+upload_max_filesize = 2M+upload_max_filesize = 256M+g" $caminhophpini
 sed -i "s+post_max_size = 8M+post_max_size = 256M+g" $caminhophpini
 sed -i "s+max_execution_time = 30+max_execution_time = 600+g" $caminhophpini

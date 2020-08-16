@@ -31,3 +31,6 @@ apt install git
 
 facil funcao titulo2 "Instalando Curl"
 apt install curl
+
+facil funcao titulo2 "Instalando Sysstat - Estatísticas do sistema"
+apt install sysstat

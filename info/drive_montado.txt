@@ -1,0 +1,2 @@
+
+if grep -qs '/mnt/efs ' /proc/mounts; then mounted=1 ; else  mounted=0 ; fi

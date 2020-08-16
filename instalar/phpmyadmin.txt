@@ -1,6 +1,8 @@
 
 facil titulo1 "Instalando o PhpMyAdmin"
 
+facil instalar repo-ubuntu-universe
+
 which phpmyadmin || apt install -y phpmyadmin php-mbstring php-gettext 
 
 ufw allow 80/tcp 

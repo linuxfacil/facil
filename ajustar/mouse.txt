@@ -1,0 +1,8 @@
+
+#Corrige erro de mouse travado no ubuntu 
+#Testado no kubuntu focal 20.04 
+
+#Ref: https://unix.stackexchange.com/questions/23164/manipulating-x-key-and-pointer-grabs-on-the-command-line/62254#62254
+
+which xdotool || apt install xdotool
+xdotool key XF86Ungrab

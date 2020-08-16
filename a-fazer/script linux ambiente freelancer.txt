@@ -1,0 +1,77 @@
+This git repo is the .WAR file unpacked.
+You should repack the .WAR and deploy in Tomcat 9.
+It was made in Java 8.
+To access the system:
+user: master
+password: 1
+=====================
+To compress the war file
+Run the command below inside the folder.
+"jar -cfv menu.war ."
+
+=============================
+run as root
+
+sudo add-apt-repository universe 
+apt update -y
+apt-get install openjdk-8-jdk -y
+useradd -m -U -d /opt/tomcat -s /bin/false tomcat
+VERSION=9.0.36
+wget https://www-eu.apache.org/dist/tomcat/tomcat-9/v${VERSION}/bin/apache-tomcat-${VERSION}.tar.gz -P /tmp
+tar -xf /tmp/apache-tomcat-${VERSION}.tar.gz -C /opt/tomcat/
+ln -s /opt/tomcat/apache-tomcat-${VERSION} /opt/tomcat/latest
+chown -R tomcat: /opt/tomcat
+sh -c 'chmod +x /opt/tomcat/latest/bin/*.sh'
+
+touch /etc/systemd/system/tomcat.service
+
+printf '
+[Unit]
+Description=Tomcat 9 servlet container
+After=network.target
+
+[Service]
+Type=forking
+
+User=tomcat
+Group=tomcat
+
+Environment="JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64"
+Environment="JAVA_OPTS=-Djava.security.egd=file:///dev/urandom -Djava.awt.headless=true"
+
+Environment="CATALINA_BASE=/opt/tomcat/latest"
+Environment="CATALINA_HOME=/opt/tomcat/latest"
+Environment="CATALINA_PID=/opt/tomcat/latest/temp/tomcat.pid"
+Environment="CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC"
+
+ExecStart=/opt/tomcat/latest/bin/startup.sh
+ExecStop=/opt/tomcat/latest/bin/shutdown.sh
+
+[Install]
+WantedBy=multi-user.target
+' > /etc/systemd/system/tomcat.service
+
+printf '
+<?xml version="1.0" encoding="UTF-8"?>
+<tomcat-users xmlns="http://tomcat.apache.org/xml"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://tomcat.apache.org/xml tomcat-users.xsd"
+              version="1.0">
+   <user username="admin" password="tomcat" roles="admin-gui,manager-gui"/>
+</tomcat-users>
+' > /opt/tomcat/latest/conf/tomcat-users.xml
+
+
+
+systemctl daemon-reload
+systemctl enable --now tomcat
+systemctl status tomcat
+
+cd /tmp
+git clone https://gitlab.com/foxmanager-project/frontend/menu
+cp menu/menu.war  /opt/tomcat/latest/webapps
+
+
+rm -rf .git
+jar -cfv menu.war .
+
