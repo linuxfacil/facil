@@ -1,0 +1,140 @@
+#!/bin/bash
+
+#Cria um novo site no apache à partir de modelo
+#Uso facil novosite nomedominio.com [opcional]ssl			  
+#Ajustes no nome da loja
+dominio_site=$1
+dominio_site_www=${dominio_site//www./} #Remover eventual WWW.
+dominio_site=${dominio_site_www//./_} #Substituir "." por "_"
+ssl=$2
+
+
+#Define as variáveis do script
+caminho_modelo=/var/www/modelo/
+caminho_novo_site=/var/www/$dominio_site
+prefixo_db=f_
+#Verifica se é subdominio
+subdominio=$(echo $dominio_site_www | grep -E '(.+\.)+.+\..+$')
+
+if [ -z "$subdominio" ]
+then
+        subdominio=nao
+else
+        subdominio=sim
+fi
+
+echo subdominio = $subdominio
+#Verifica se parâmetros são válidos
+
+if [ "$(id -u)" -ne 0 ] ; then echo "Por favor, execute o script como super-usuário sudo/root." ; exit 1 ; fi
+
+if [ -z "$1" ]
+then
+      echo "Nome do domínio do site não definido"
+        exit 1
+fi													  
+#Se for SSL, ativa, senão, cria loja			
+if [ "$ssl" == "ssl" ]
+then
+        #Instalar SSL
+        if [ "$subdomain" == "sim" ]
+        then
+                aliaswww=''
+                rewritewww=''
+
+                sudo certbot --apache -d $dominio_site_www  -n
+
+        else
+                aliaswww='ServerAlias www.$dominio_site_www'
+                rewritewww='RewriteCond %%{SERVER_NAME} =www.$dominio_site_www [OR]'
+
+                sudo certbot --apache -d $dominio_site_www -d www.$dominio_site_www -n
+
+        fi
+
+        printf "<VirtualHost *:80>
+            ServerAdmin admin@test.com
+            ServerName $dominio_site_www
+            $aliaswww
+            DocumentRoot $caminho_novo_site
+            ErrorLog /error.log
+            CustomLog /access.log combined
+
+            RewriteEngine on
+            $rewritewww
+            RewriteCond %%{SERVER_NAME} =$dominio_site_www
+            RewriteRule ^ https://%%{SERVER_NAME}%%{REQUEST_URI} [END,NE,R=permanent]
+        </VirtualHost>
+
+        <Directory $caminho_novo_site/>
+            AllowOverride All
+        </Directory> " > /etc/apache2/sites-enabled/$dominio_site.conf
+
+        sudo service apache2 restart graceful
+
+else
+        if [ -d "$caminho_novo_site" ]
+        then
+                echo "Diretorio $caminho_novo_site já existe."
+                exit 1
+        fi
+
+
+#Copia nova loja à partir do template
+sudo cp -a $pathtemplate $caminho_novo_site
+
+#Muda as chaves de segurança da nova loja
+cp $caminho_novo_site/wp-config-sample.php $caminho_novo_site/wp-config.php
+SALT=$(curl -L https://api.wordpress.org/secret-key/1.1/salt/)
+STRING='put your unique phrase here'
+printf '%s\n' "g/$STRING/d" a "$SALT" . w | ed -s $caminho_novo_site/wp-config.php
+
+#Criar banco de dados
+dbname=$prefixdb$dominio_site
+dbpasswd=$(openssl rand -hex 32)
+dbuser=z_${dominio_site:0:32}
+dbhost=3.228.228.211
+
+mysql -e "CREATE DATABASE $dbname DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;"
+mysql -e "CREATE USER '$dbuser'@'%' IDENTIFIED BY '$dbpasswd';"
+mysql -e "GRANT ALL PRIVILEGES ON $dbname.* TO '$dbuser'@'%';"
+mysql -e "FLUSH PRIVILEGES;"
+
+#Ajustar dados de conexão no wp-config.php
+sudo sed -i "s+define( 'DB_NAME', 'database_name_here' );+define('DB_NAME', '$dbname');+g" $caminho_novo_site/wp-config.php
+sudo sed -i "s+define( 'DB_USER', 'username_here' );+define( 'DB_USER', '$dbuser' );+g" $caminho_novo_site/wp-config.php
+sudo sed -i "s+define( 'DB_PASSWORD', 'password_here' );+define( 'DB_PASSWORD', '$dbpasswd' );+g" $caminho_novo_site/wp-config.php
+sudo sed -i "s+define( 'DB_HOST', 'localhost' );+define( 'DB_HOST', '$dbhost' );+g" $caminho_novo_site/wp-config.php
+
+#Ajustar arquivos de hosts do apache
+
+printf "<VirtualHost *:80>
+    ServerAdmin admin@test.com
+    ServerName $dominio_site_www
+    ServerAlias www.$dominio_site_www
+    DocumentRoot $caminho_novo_site
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+
+<Directory $caminho_novo_site/>
+    AllowOverride All
+</Directory>
+
+" > /etc/apache2/sites-available/$dominio_site.conf
+
+sudo a2ensite $dominio_site.conf
+
+
+printf "<Files *.php> \n deny from all \n</Files>\n" > $caminho_novo_site/wp-content/uploads/.htaccess
+printf "<Files *.php> \n deny from all \n</Files>\n" > $caminho_novo_site/wp-includes/.htaccess
+
+#Sites ativos
+echo "Sites ativos no apache"
+ls /etc/apache2/sites-enabled/ ls
+
+sudo service apache2 restart graceful
+
+
+
+fi
