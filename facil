@@ -40,7 +40,7 @@ else
 	export v4=$4
 	
 	#Executa comando
-	bash $diretorio_facil/cabecalho.txt
+	bash $diretorio_facil/sys/cabecalho.txt
 	set -xve
 	bash $diretorio_facil/$1/$2.txt
 	set +xve

@@ -81,7 +81,7 @@ else
 
 
 #Copia nova loja à partir do template
-sudo cp -a $pathtemplate $caminho_novo_site
+sudo cp -a $caminho_modelo $caminho_novo_site
 
 #Muda as chaves de segurança da nova loja
 cp $caminho_novo_site/wp-config-sample.php $caminho_novo_site/wp-config.php
@@ -90,9 +90,9 @@ STRING='put your unique phrase here'
 printf '%s\n' "g/$STRING/d" a "$SALT" . w | ed -s $caminho_novo_site/wp-config.php
 
 #Criar banco de dados
-dbname=$prefixdb$dominio_site
+dbname=$prefixo_db$dominio_site
 dbpasswd=$(openssl rand -hex 32)
-dbuser=z_${dominio_site:0:32}
+dbuser=$prefixo_db${dominio_site:0:32}
 dbhost=3.228.228.211
 
 mysql -e "CREATE DATABASE $dbname DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;"
