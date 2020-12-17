@@ -43,7 +43,7 @@ else
 	bash $diretorio_facil/sys/cabecalho.txt
 	set -xve
 	bash $diretorio_facil/$1/$2.txt
-	#set +xve
+	set +xve
 fi
 
 #Manter o shell BASH, independentemente da chamada do Shell (sh ou dash) 
