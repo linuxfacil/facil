@@ -4,7 +4,7 @@ facil funcao titulo1 "Instalando o PHP"
 
 facil sys cabecalho
 
-versaophp=7.4
+versaophp=7.2
 caminhophpini=/etc/php/$versaophp/apache2/php.ini
 
 #facil instalar repo-ubuntu-universe
